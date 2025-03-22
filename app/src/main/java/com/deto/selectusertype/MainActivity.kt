@@ -5,9 +5,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -31,39 +33,46 @@ class MainActivity : ComponentActivity() {
         setContent {
             SelectUserTypeTheme {
                 Scaffold(
-                    modifier = Modifier.fillMaxSize().padding(10.dp),
-                    containerColor = Color(26, 31, 61),
-                    topBar = { ButtonBack() }
+                    modifier = Modifier.fillMaxSize(),
+                    containerColor = Color(26, 31, 61)
                 ) { innerPadding ->
 
-                    Column() {
+                    Column(
+                        modifier = Modifier.padding(innerPadding).padding(20.dp)
+                    ) {
 
-                        SelectUserType(
-                            modifier = Modifier.padding(innerPadding)
-                        )
+                        ButtonBack()
 
-                        Row(
+                        Spacer(modifier = Modifier.height(10.dp))
 
-                        ) {
+                        SelectUserType()
 
-                            CustomCard("Author")
-                            CustomCard("Editor")
+                        PleaseChoose()
+
+                        Spacer(modifier = Modifier.height(20.dp))
+
+                        Row( modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)  ) {
+
+                            CustomCard("Author", Modifier.weight(1f))
+                            CustomCard("Editor", Modifier.weight(1f))
 
                         }
 
-                        Row(
-
-                        ) {
-                            CustomCard("Moderator")
-                            CustomCard("Accountant")
+                        Row( modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)  ) {
+                            CustomCard("Moderator", Modifier.weight(1f))
+                            CustomCard("Accountant", Modifier.weight(1f))
 
                         }
 
-                        Row(
-
-                        ) {
-                            CustomCard("Designer")
-                            CustomCard("Developer")
+                        Row( modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)  ) {
+                            CustomCard("Designer", Modifier.weight(1f))
+                            CustomCard("Developer", Modifier.weight(1f))
 
                         }
                     }
@@ -96,10 +105,20 @@ fun SelectUserType(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun CustomCard(name: String){
+fun PleaseChoose(modifier: Modifier = Modifier) {
+    Text(
+        text = "Please Choose your profession",
+        fontSize = 16.sp,
+        color = Color.Gray,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun CustomCard(name: String, modifier: Modifier = Modifier ){
     Card(
-        modifier = Modifier.fillMaxWidth(.3f).fillMaxHeight(.3f),
-        elevation = CardDefaults.cardElevation( defaultElevation = 8.dp ),
+        //modifier = Modifier.fillMaxWidth(.3f).fillMaxHeight(.3f),
+        modifier = modifier.padding(8.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(44, 52, 94)
         )
