@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -22,6 +24,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,14 +55,46 @@ class MainActivity : ComponentActivity() {
             SelectUserTypeTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    containerColor = Color(26, 31, 61)
+                    containerColor = Color(0, 16, 42, 255),
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Button(
+                                    onClick = {},
+                                    contentPadding = PaddingValues(horizontal = 20.dp, vertical = 0.dp),
+                                    colors = ButtonColors(
+                                        contentColor = Color.White,
+                                        containerColor = Color(34, 199, 223, 255),
+                                        disabledContentColor = Color.White,
+                                        disabledContainerColor = Color.Transparent
+
+                                    )
+
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.ArrowBack,
+                                        contentDescription = "Back"
+                                    )
+                                    Text("Back")
+                                }
+
+                            },
+                            colors = TopAppBarColors(
+                                containerColor = Color(0, 16, 42, 255),
+                                scrolledContainerColor = Color(0, 16, 42, 255),
+                                navigationIconContentColor = Color.White,
+                                titleContentColor = Color.White,
+                                actionIconContentColor = Color.White
+                            )
+                        )
+                    }
+
                 ) { innerPadding ->
 
                     Column(
-                        modifier = Modifier.padding(innerPadding).padding(20.dp)
+                        modifier = Modifier.padding(innerPadding).padding(20.dp).fillMaxWidth()
                     ) {
 
-                        ButtonBack()
 
                         Spacer(modifier = Modifier.height(10.dp))
 
