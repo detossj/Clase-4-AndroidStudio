@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SelectUserType</string>
+    <string name="author_card_title">Author</string>
+    <string name="editor_card_title">Editor</string>
+    <string name="moderator_card_title">Moderator</string>
+    <string name="accountant_card_title">Accountant</string>
+    <string name="designer_card_title">Designer</string>
+    <string name="developer_card_title">Developer</string>
 </resources>

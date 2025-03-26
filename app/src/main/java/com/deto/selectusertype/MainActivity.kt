@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,13 +23,26 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.deto.selectusertype.ui.theme.SelectUserTypeTheme
 
 class MainActivity : ComponentActivity() {
+
+    val cardList = listOf(
+        CardInfo(R.string.author_card_title,R.drawable.history_edu_24px),
+        CardInfo(R.string.editor_card_title, R.drawable.border_color_24px),
+        CardInfo(R.string.moderator_card_title, R.drawable.manage_accounts_24px),
+        CardInfo(R.string.accountant_card_title, R.drawable.assignment_ind_24px),
+        CardInfo(R.string.designer_card_title, R.drawable.stylus_note_24px),
+        CardInfo(R.string.developer_card_title, R.drawable.code_24px)
+
+    )
+
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +104,7 @@ class MainActivity : ComponentActivity() {
 
                             Spacer(Modifier.width(40.dp))
 
-                            Button( onClick = {}) {
+                            Button( onClick = {}, colors = ButtonColors( contentColor = Color.White, containerColor = Color(50, 233, 219), disabledContentColor = Color.Gray, disabledContainerColor = Color.Blue)) {
                                 Icon(
 
                                     imageVector = Icons.Default.Check,
@@ -109,7 +123,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ButtonBack(  ){
-    Button( onClick = { } ) {
+    Button( onClick = { }, colors = ButtonColors( contentColor = Color.White, containerColor = Color(50, 233, 219), disabledContentColor = Color.Gray, disabledContainerColor = Color.Blue)  ) {
+
+
 
         Text(
             text = "Back"
@@ -155,6 +171,8 @@ fun CustomCard(name: String, modifier: Modifier = Modifier ){
         )
     }
 }
+
+class CardInfo( val title: Int, val icon: Int )
 
 
 
