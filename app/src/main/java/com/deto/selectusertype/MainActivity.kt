@@ -3,7 +3,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -12,10 +12,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
@@ -24,10 +25,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -87,6 +88,43 @@ class MainActivity : ComponentActivity() {
                                 actionIconContentColor = Color.White
                             )
                         )
+                    },
+                    bottomBar = {
+                        BottomAppBar(
+                            containerColor = Color(0, 16, 42, 255)
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                TextButton(
+                                    modifier = Modifier
+                                        .padding(PaddingValues(end = 10.dp))
+                                        .fillMaxWidth(.7f),
+                                    onClick = {},
+                                    colors = ButtonColors(
+                                        contentColor = Color.White,
+                                        containerColor = Color(26, 40, 65, 255),
+                                        disabledContentColor = Color.White,
+                                        disabledContainerColor = Color.Transparent
+                                    )
+                                ) {
+                                    Text(stringResource(R.string.enter_guest))
+                                }
+
+                                Button(
+                                    onClick = {},
+                                    shape = CircleShape,
+                                    contentPadding = PaddingValues(0.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.KeyboardArrowRight,
+                                        contentDescription = "Back",
+                                        modifier = Modifier.padding( 0.dp )
+                                    )
+                                }
+                            }
+                        }
                     }
 
                 ) { innerPadding ->
@@ -129,26 +167,6 @@ class MainActivity : ComponentActivity() {
 
                         }
 
-                        Row( modifier = Modifier
-                            .fillMaxWidth() ) {
-                            Text(
-                                modifier = Modifier.background(color = Color(44, 52, 94)).padding(20.dp),
-                                text = "Enter as a guest",
-                                color = Color.Gray,
-
-                            )
-
-                            Spacer(Modifier.width(40.dp))
-
-                            Button( onClick = {}, colors = ButtonColors( contentColor = Color.White, containerColor = Color(50, 233, 219), disabledContentColor = Color.Gray, disabledContainerColor = Color.Blue)) {
-                                Icon(
-
-                                    imageVector = Icons.Default.Check,
-                                    contentDescription = "Icon",
-                                    tint = Color.White
-                                )
-                            }
-                        }
                     }
 
                 }
@@ -157,17 +175,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun ButtonBack(  ){
-    Button( onClick = { }, colors = ButtonColors( contentColor = Color.White, containerColor = Color(50, 233, 219), disabledContentColor = Color.Gray, disabledContainerColor = Color.Blue)  ) {
-
-
-
-        Text(
-            text = "Back"
-        )
-    }
-}
 
 
 @Composable

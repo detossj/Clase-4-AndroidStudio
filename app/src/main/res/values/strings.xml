@@ -6,4 +6,7 @@
     <string name="accountant_card_title">Accountant</string>
     <string name="designer_card_title">Designer</string>
     <string name="developer_card_title">Developer</string>
+    <string name="enter_guest">Enter a guest</string>
+    <string name="select">Select User Type</string>
+    <string name="please">Please Choose your profession</string>
 </resources>
