@@ -35,10 +35,12 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -175,7 +177,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ListCards( cards: List<CardInfo>){
-    //var select by remember { mutableIntStateOf(0) }
+    var select by remember { mutableIntStateOf(0) }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(20.dp),
@@ -185,15 +187,14 @@ fun ListCards( cards: List<CardInfo>){
         items(cards){
             Card(
                 colors = CardColors(
-                    //containerColor = if( select = it.id ) Color.Red else Color.Green,
-                    containerColor = Color(26, 40, 65, 255),
+                    containerColor = if( select == it.id ) Color.Red else Color(26, 40, 65, 255),
                     contentColor = Color.White,
                     disabledContentColor = Color.White,
                     disabledContainerColor = Color.Transparent
                 ),
                 modifier = Modifier
                     .padding(10.dp)
-                    //.clickable { select = it.id }
+                    .clickable { select = it.id }
             ) {
                 Column(
                     modifier = Modifier
