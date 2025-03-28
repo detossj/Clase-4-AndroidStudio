@@ -3,6 +3,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.collection.mutableIntListOf
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,6 +35,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -45,12 +51,12 @@ import com.deto.selectusertype.ui.theme.SelectUserTypeTheme
 class MainActivity : ComponentActivity() {
 
     val cardList = listOf(
-        CardInfo(R.string.author_card_title,R.drawable.history_edu_24px),
-        CardInfo(R.string.editor_card_title, R.drawable.border_color_24px),
-        CardInfo(R.string.moderator_card_title, R.drawable.manage_accounts_24px),
-        CardInfo(R.string.accountant_card_title, R.drawable.assignment_ind_24px),
-        CardInfo(R.string.designer_card_title, R.drawable.stylus_note_24px),
-        CardInfo(R.string.developer_card_title, R.drawable.code_24px)
+        CardInfo(R.string.author_card_title,R.drawable.history_edu_24px,1),
+        CardInfo(R.string.editor_card_title, R.drawable.border_color_24px,2),
+        CardInfo(R.string.moderator_card_title, R.drawable.manage_accounts_24px,3),
+        CardInfo(R.string.accountant_card_title, R.drawable.assignment_ind_24px,4),
+        CardInfo(R.string.designer_card_title, R.drawable.stylus_note_24px,5),
+        CardInfo(R.string.developer_card_title, R.drawable.code_24px,6)
 
     )
 
@@ -157,40 +163,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
 
-                        LazyVerticalGrid(
-                            columns = GridCells.Fixed(2),
-                            contentPadding = PaddingValues(20.dp),
-                            modifier = Modifier.fillMaxWidth()
-
-                        ) {
-                            items(cardList){
-                                Card(
-                                    colors = CardColors(
-                                        containerColor = Color(26, 40, 65, 255),
-                                        contentColor = Color.White,
-                                        disabledContentColor = Color.White,
-                                        disabledContainerColor = Color.Transparent
-                                    ),
-                                    modifier = Modifier.padding(10.dp)
-                                ) {
-                                    Column(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .fillMaxHeight()
-                                            .padding(horizontal = 20.dp, vertical = 35.dp),
-                                        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Bottom
-                                    ) {
-                                        Icon(painter = painterResource(it.icon), contentDescription = "Account Box", modifier = Modifier.size(50.dp))
-                                        Text(text = stringResource(it.title), color = Color.White, modifier = Modifier.padding(top = 10.dp))
-                                    }
-                                }
-                            }
-
-                        }
-
-
-
+                        ListCards(cardList)
 
                     }
 
@@ -200,47 +173,47 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-
 @Composable
-fun SelectUserType(modifier: Modifier = Modifier) {
-    Text(
-        text = "Select User Type",
-        fontSize = 32.sp,
-        color = Color.White,
-        modifier = modifier
-    )
-}
+fun ListCards( cards: List<CardInfo>){
+    //var select by remember { mutableIntStateOf(0) }
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(20.dp),
+        modifier = Modifier.fillMaxWidth()
 
-@Composable
-fun PleaseChoose(modifier: Modifier = Modifier) {
-    Text(
-        text = "Please Choose your profession",
-        fontSize = 16.sp,
-        color = Color.Gray,
-        modifier = modifier
-    )
-}
-
-@Composable
-fun CustomCard(name: String, modifier: Modifier = Modifier ){
-    Card(
-        //modifier = Modifier.fillMaxWidth(.3f).fillMaxHeight(.3f),
-        modifier = modifier.padding(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color(44, 52, 94)
-        )
     ) {
+        items(cards){
+            Card(
+                colors = CardColors(
+                    //containerColor = if( select = it.id ) Color.Red else Color.Green,
+                    containerColor = Color(26, 40, 65, 255),
+                    contentColor = Color.White,
+                    disabledContentColor = Color.White,
+                    disabledContainerColor = Color.Transparent
+                ),
+                modifier = Modifier
+                    .padding(10.dp)
+                    //.clickable { select = it.id }
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(horizontal = 20.dp, vertical = 35.dp),
+                    horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom
+                ) {
+                    Icon(painter = painterResource(it.icon), contentDescription = "Account Box", modifier = Modifier.size(50.dp))
+                    Text(text = stringResource(it.title), color = Color.White, modifier = Modifier.padding(top = 10.dp))
+                }
+            }
+        }
 
-        Text(
-            text = "$name",
-            color = Color.White,
-            modifier = Modifier.padding(5.dp)
-        )
     }
 }
 
-class CardInfo( val title: Int, val icon: Int )
+
+class CardInfo( val title: Int, val icon: Int, val id: Int )
 
 
 
