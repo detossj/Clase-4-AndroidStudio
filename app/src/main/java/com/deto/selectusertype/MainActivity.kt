@@ -32,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.deto.selectusertype.ui.theme.SelectUserTypeTheme
@@ -130,42 +131,31 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
 
                     Column(
-                        modifier = Modifier.padding(innerPadding).padding(20.dp).fillMaxWidth()
-                    ) {
-
-
-                        Spacer(modifier = Modifier.height(10.dp))
-
-                        SelectUserType()
-
-                        PleaseChoose()
-
-                        Spacer(modifier = Modifier.height(20.dp))
-
-                        Row( modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f)  ) {
-
-                            CustomCard("Author", Modifier.weight(1f))
-                            CustomCard("Editor", Modifier.weight(1f))
-
+                        modifier = Modifier
+                            .padding(innerPadding)
+                            .fillMaxWidth(),
+                        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+                    )
+                    {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(.9f)
+                        )
+                        {
+                            Text(
+                                text = stringResource(R.string.select),
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 25.sp
+                            )
+                            Text(
+                                text = stringResource(R.string.please),
+                                color = Color(111, 125, 150, 255),
+                                fontSize = 15.sp
+                            )
                         }
 
-                        Row( modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f)  ) {
-                            CustomCard("Moderator", Modifier.weight(1f))
-                            CustomCard("Accountant", Modifier.weight(1f))
 
-                        }
 
-                        Row( modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f)  ) {
-                            CustomCard("Designer", Modifier.weight(1f))
-                            CustomCard("Developer", Modifier.weight(1f))
-
-                        }
 
                     }
 
